@@ -1,43 +1,21 @@
-const matrix = n => {
-    const results = [];
-
-    for(let i = 0; i < n; i++) {
-        results.push([]);
-    }
-
-    let counter = 1;
-    let startCol = 0;
-    let endCol = n - 1;
-    let startRow = 0;
-    let endRow = n - 1;
-
-    while(startCol <= endCol && startRow <= endRow) {
-        for(let i = startCol; i <= endCol; i++) {
-            results[startRow][i] = counter;
-            counter++;
+const selectionSort = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        let indexOfMin = i;
+        
+        for(let j = i+1; j < arr.length; j++) {
+            if(arr[j] < arr[indexOfMin]) {
+                indexOfMin = j;
+            }
         }
-        startRow++;
 
-        for(let i = startRow; i <= endRow; i++) {
-            results[i][endCol] = counter;
-            counter++;
+        if(indexOfMin !== arr[i]) {
+            let least = arr[indexOfMin];
+            arr[indexOfMin] = arr[i];
+            arr[i] = least;
         }
-        endCol--;
-
-        for(let i = endCol; i >= startCol; i--) {
-            results[endRow][i] = counter;
-            counter++;
-        }
-        endRow--;
-
-        for(let i = endRow; i >= startRow; i--) {
-            results[i][startCol] = counter;
-            counter++;
-        }
-        startCol++;
-    }
-
-    console.log(results);
+    } 
+    return arr;
 };
 
-matrix(5);
+const result = selectionSort([5, 0, 37, -6, 32]);
+console.log(result);
