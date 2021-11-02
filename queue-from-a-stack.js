@@ -5,16 +5,16 @@ class Stack {
 
     push(rec) {
         this.data.push(rec);
-    }
+    } 
 
     pop() {
-       return this.data.pop();
+        return this.data.pop();
     }
 
     peek() {
-      return this.data[this.data.length - 1];
+        return this.data[this.data.length - 1];
     }
-};
+}
 
 class Queue {
     constructor() {
@@ -30,17 +30,28 @@ class Queue {
         while(this.first.peek()) {
             this.second.push(this.first.pop());
         }
-
-        let record = this.second.pop();
+        //save a reference to the record and restore the state before the return
+        const record = this.second.pop();
 
         while(this.second.peek()) {
             this.first.push(this.second.pop());
         }
+
         return record;
     }
 
     peek() {
-        return this.second.peek();
+       //peek from stack b to restore back to stack a
+       while(this.first.peek()) {
+           this.second.push(this.first.pop());
+       }
+       
+       const record = this.second.peek();
+
+       while(this.second.peek()) {
+           this.first.push(this.second.pop());
+       }
+       return record;
     }
 }
 
@@ -57,5 +68,3 @@ result2.add(2);
 result2.add(3);
 // result2.remove();
 console.log(result2);
-
-
