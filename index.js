@@ -1,21 +1,11 @@
-const selectionSort = arr => {
-    for(let i = 0; i < arr.length; i++) {
-        indexOfMin = i;
+const revInt = n => {
+    const reversed = n.toString()
+    .split('')
+    .reverse()
+    .join('');
 
-        for(let j = i+1; j < arr.length; j++) {
-            if(arr[j] < arr[indexOfMin]) {
-                indexOfMin = j;
-            }
-        }
-
-        if(indexOfMin !== i) {
-            let least = arr[indexOfMin];
-            arr[indexOfMin] = arr[i];
-            arr[i] = least;
-        }
-    }
-    return arr;
+    return parseInt(reversed) * Math.sign(n);
 };
 
-const result = selectionSort([5, 0, 37, -6, 32]);
+const result = revInt(-87);
 console.log(result);
