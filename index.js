@@ -1,11 +1,11 @@
-const revInt = n => {
-    const reversed = n.toString()
-    .split('')
-    .reverse()
-    .join('');
+const capitalize = str => {
+    const words = [];
 
-    return parseInt(reversed) * Math.sign(n);
+    for(let word of str.split(' ')) {
+        words.push(word[0].toUpperCase() + word.slice(1));
+    }
+    return words.join(' ');
 };
 
-const result = revInt(-87);
+const result = capitalize('a short sentence');
 console.log(result);
