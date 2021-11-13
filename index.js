@@ -1,15 +1,32 @@
-const fizzBuzz = n => {
-    for(let i = 1; i <= n; i++) {
-        if(i % 15 === 0) {
-            console.log('fizzbuzz');
-        } else if(i % 3 === 0) {
-            console.log('fizz');
-        } else if(i % 5 === 0) {
-            console.log('buzz');
-        } else {
-            console.log(i);
-        }
+const mergeSort = arr => {
+    if(arr.length === 1) {
+        return arr;
     }
+
+    //subdivide
+    const center = arr.length / 2;
+
+    const left = arr.slice(0, center);
+    const right = arr.slice(center);
+
+    return merge(mergeSort(left), mergeSort(right));
 };
 
-fizzBuzz(30);
+const merge = (left, right) => {
+    const results = [];
+
+    while(left.length && right.length) {
+        if(left[0] < right[0]) {
+            results.push(left.shift())
+        } else {
+            results.push(right.shift());
+        }
+    }
+    return [...results, ...left, ...right];
+}
+
+const result = mergeSort([10, 0 , 97, -6]);
+console.log(result);
+
+const result2 = merge([3,4], [-2,13]);
+console.log(result2);
