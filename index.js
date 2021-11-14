@@ -3,7 +3,6 @@ const mergeSort = arr => {
         return arr;
     }
 
-    //subdivide
     const center = arr.length / 2;
 
     const left = arr.slice(0, center);
@@ -13,20 +12,20 @@ const mergeSort = arr => {
 };
 
 const merge = (left, right) => {
-    const results = [];
+    const list = [];
 
     while(left.length && right.length) {
         if(left[0] < right[0]) {
-            results.push(left.shift())
+            list.push(left.shift());
         } else {
-            results.push(right.shift());
+            list.push(right.shift());
         }
     }
-    return [...results, ...left, ...right];
-}
+    return [...list, ...left, ...right];
+};
 
-const result = mergeSort([10, 0 , 97, -6]);
+const result = merge([3,6], [-9,46]);
 console.log(result);
 
-const result2 = merge([3,4], [-2,13]);
+const result2 = mergeSort([9, 4, -98, 0]);
 console.log(result2);
