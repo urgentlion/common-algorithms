@@ -1,4 +1,4 @@
-const mergeSort = arr => {
+const mergeSort= arr => {
     if(arr.length === 1) {
         return arr;
     }
@@ -8,24 +8,24 @@ const mergeSort = arr => {
     const left = arr.slice(0, center);
     const right = arr.slice(center);
 
+    //helper function merge
     return merge(mergeSort(left), mergeSort(right));
 };
 
 const merge = (left, right) => {
-    const list = [];
+    const results = [];
 
     while(left.length && right.length) {
         if(left[0] < right[0]) {
-            list.push(left.shift());
+            results.push(left.shift());
         } else {
-            list.push(right.shift());
+            results.push(right.shift());
         }
     }
-    return [...list, ...left, ...right];
+    return [...results, ...left, ...right];
 };
-
-const result = merge([3,6], [-9,46]);
+const result = mergeSort([9, 0 , -45, 6]);
 console.log(result);
 
-const result2 = mergeSort([9, 4, -98, 0]);
-console.log(result2);
+const results2 = merge([9, 0] , [-45, 6]);
+console.log(results2);
