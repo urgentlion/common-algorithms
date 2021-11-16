@@ -1,14 +1,13 @@
-const mergeSort= arr => {
+const mergeSort = arr => {
     if(arr.length === 1) {
         return arr;
     }
 
     const center = arr.length / 2;
-
     const left = arr.slice(0, center);
     const right = arr.slice(center);
 
-    //helper function merge
+    //helper merge function
     return merge(mergeSort(left), mergeSort(right));
 };
 
@@ -22,10 +21,11 @@ const merge = (left, right) => {
             results.push(right.shift());
         }
     }
-    return [...results, ...left, ...right];
-};
-const result = mergeSort([9, 0 , -45, 6]);
+    return [...results, ...right, ...left];
+}
+
+const result = mergeSort([10, 0 , 97, -6]);
 console.log(result);
 
-const results2 = merge([9, 0] , [-45, 6]);
-console.log(results2);
+const result2 = merge([3,4], [-2,13]);
+console.log(result2);
