@@ -1,29 +1,17 @@
-const mergeSort = arr => {
-    if(arr.length === 1) {
-        return arr;
-    }
-
-    const center = arr.length / 2;
-    const left = arr.slice(0, center);
-    const right = arr.slice(center);
-
-    return merge(mergeSort(left), mergeSort(right));
-}
-
-const merge = (left, right) => {
+const chunk = (arr, size) => {
     const array = [];
 
-    while(left.length && right.length) {
-        if(left[0] < right[0]) {
-            array.push(left.shift());
+    for(let el of arr) {
+        const last = array[array.length - 1];
+
+        if(!last || last.length === size) {
+            array.push([el]);
         } else {
-            array.push(right.shift());
+            last.push(el);
         }
-    } 
-    return [...array, ...left, ...right];
+    }
+    return array;
 };
 
-const result = merge([3,4], [-2,13]);
+const result = chunk([1,2,3,4], 2);
 console.log(result);
-const result2 = mergeSort([10, 0 , 97, -6]);
-console.log(result2);
