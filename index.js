@@ -1,30 +1,31 @@
 const mergeSort = arr => {
     if(arr.length === 1) {
         return arr;
-    }
+   };
 
-    const divide = arr.length / 2;
-
-    const left = arr.slice(0, divide);
-    const right = arr.slice(divide);
-
-    //merge helper function
+    //helper variables
+    const center = arr.length / 2;
+    const left = arr.slice(0, center);
+    const right = arr.slice(center);
+    
+    //merge the subdivided arrays
     return merge(mergeSort(left), mergeSort(right));
+
 };
 
 const merge = (left, right) => {
-
-    mergedArray = [];
+    const array = [];
 
     while(left.length && right.length) {
         if(left[0] < right[0]) {
-            mergedArray.push(left.shift());
+            array.push(left.shift());
         } else {
-            mergedArray.push(right.shift());
+            array.push(right.shift())
         }
     }
-    return [ ...mergedArray, ...left, ...right];
+    return [...array, ...left, ...right];
 };
+
 
 const result = mergeSort([10, 0 , 97, -6, 5]);
 console.log(result);
