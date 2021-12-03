@@ -1,17 +1,22 @@
-const chunk = (arr, size) => {
-    const array = [];
+const selectionSort = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        let indexOfLeast = i;
 
-    for(let el of arr) {
-        const last = array[array.length - 1];
+        for(let j = i + 1; j < arr.length; j++) {
+            if(arr[j] < arr[indexOfLeast]) {
+                indexOfLeast = j;
+            }
+        }
 
-        if(!last || last.length === size) {
-            array.push([el]);
-        } else {
-            last.push(el);
+        if(indexOfLeast !== i) {
+            let least = arr[indexOfLeast];
+            arr[indexOfLeast] = arr[i];
+            arr[i] = least;
         }
     }
-    return array;
+    return arr;
 };
 
-const result = chunk([1,2,3,4], 2);
+
+const result = selectionSort([5, 0, 37, -6, 32]);
 console.log(result);
