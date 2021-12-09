@@ -1,22 +1,32 @@
-const selectionSort = arr => {
-    for(let i = 0; i < arr.length; i++) {
-        let indexOfLeast = i;
+const mergeSort = arr => {
+    if(arr.length === 1) {
+        return arr;
+    }
+    
+    const center = arr.length / 2;
+    const left = arr.slice(0, center);
+    const right = arr.slice(center);
 
-        for(let j = i + 1; j < arr.length; j++) {
-            if(arr[j] < arr[indexOfLeast]) {
-                indexOfLeast = j;
-            }
-        }
+    //return subdivided array merged
+    return merge(mergeSort(left), mergeSort(right));
+};
 
-        if(indexOfLeast !== i) {
-            let least = arr[indexOfLeast];
-            arr[indexOfLeast] = arr[i];
-            arr[i] = least;
+const merge = (left, right) => {
+    const array = [];
+
+    while(left.length && right.length) {
+        if(left[0] < right[0]) {
+            array.push(left.shift());
+        } else {
+            array.push(right.shift());
         }
     }
-    return arr;
+    return [...array, ...left, ...right];
 };
 
 
-const result = selectionSort([5, 0, 37, -6, 32]);
+const result = mergeSort([10, 0 , 97, -6, 5]);
 console.log(result);
+
+const result2 = merge([3,4], [-2,13]);
+console.log(result2);
