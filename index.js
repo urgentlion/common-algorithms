@@ -1,61 +1,32 @@
-class Stack {
-    constructor() {
-        this.data = [];
+const mergeSort = arr => {
+    if(arr.length === 1) {
+        return arr;
     }
 
-    push(rec) {
-        this.data.push(rec);
-    }
+    let center = arr.length / 2;
+    let left = arr.slice(0, center);
+    let right = arr.slice(center);
 
-    pop() {
-        return this.data.pop();
-    }
+    //now merge the subdivided arrays into sorted order
+    return merge(mergeSort(left), mergeSort(right));
+};
 
-    peek() {
-        return this.data[this.data.length - 1];
-    }
-}
+const merge = (left, right) => {
+    const array = [];
 
-class Queue {
-    constructor() {
-        this.first = new Stack();
-        this.second = new Stack();
-    }
-
-    add(rec) {
-        this.first.push(rec);
-    }
-
-    remove() {
-        while(this.first.peek()) {
-            this.second.push(this.first.pop());
+    while(left.length && right.length) {
+        if(left[0] < right[0]) {
+            array.push(left.shift());
+        } else {
+            array.push(right.shift());
         }
-        //save a reference to the record and restore the state before the return
-        let record = this.second.pop();
-
-        while(this.second.peek()) {
-            this.first.push(this.second.pop());
-        }
-        return record;
     }
-
-    peek() {
-        //peek from stack b to restore back to stack a
-        return this.second.peek();
-    }
-}
+    return [...array, ...left, ...right];
+};
 
 
-const result = new Stack();
-result.push(1);
-result.push(2);
-result.push(3);
-// result.pop();
+const result = mergeSort([10, 0 , 97, -6, 5]);
 console.log(result);
 
-const result2 = new Queue();
-result2.add(1);
-result2.add(2);
-result2.add(3);
-// result2.remove();
+const result2 = merge([3,4], [-2,13]);
 console.log(result2);
